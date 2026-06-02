@@ -10,8 +10,8 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      '/api': 'http://localhost:5000',
-      '/uploads': 'http://localhost:5000',
+      '/api': 'https://freelance-backend-4ocv.onrender.com',
+      '/uploads': 'https://freelance-backend-4ocv.onrender.com',
     },
   },
 });
