@@ -1,0 +1,44 @@
+## ─────────────────────────────────────────────
+## render.yaml — Render Blueprint (IaC)
+## ─────────────────────────────────────────────
+## Defines the backend web service for Render.
+## Environment variables must be set in the
+## Render Dashboard → Environment tab.
+## ─────────────────────────────────────────────
+
+services:
+  - type: web
+    name: frellancer-api
+    runtime: node
+    region: singapore           # closest to India
+    plan: free                  # change to 'starter' for production
+    buildCommand: npm install
+    startCommand: node index.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_CONNECTION_STRING
+        sync: false             # set manually in Render Dashboard
+      - key: JWT_ACCESS_SECRET
+        sync: false
+      - key: JWT_REFRESH_SECRET
+        sync: false
+      - key: JWT_ACCESS_EXPIRY
+        value: 15m
+      - key: JWT_REFRESH_EXPIRY
+        value: 7d
+      - key: FRONTEND_URL
+        sync: false             # your Vercel URL, e.g. https://frellancer.vercel.app
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
